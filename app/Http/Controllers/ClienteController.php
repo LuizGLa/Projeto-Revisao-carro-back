@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $cliente = Cliente::all();
@@ -17,9 +14,6 @@ class ClienteController extends Controller
         return $cliente;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
 
@@ -37,9 +31,6 @@ class ClienteController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Cliente $cliente)
     {
         try {
@@ -52,9 +43,6 @@ class ClienteController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Cliente $cliente)
     {
         try {
@@ -71,9 +59,6 @@ class ClienteController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Cliente $cliente)
     {
         try {
