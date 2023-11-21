@@ -7,20 +7,33 @@ use Illuminate\Http\Request;
 
 class RevisaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        try {
+            $revisao = Revisao::all();
+
+            return $revisao;
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'data' => 'required',
+                'valor' => 'required',
+                'descricao' => 'required',
+                'carro_id' => 'required',
+                'cliente_id' => 'required',
+            ]);
+            $revisao = Revisao::create($request->all());
+
+            return $revisao;
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
     /**
@@ -28,22 +41,44 @@ class RevisaoController extends Controller
      */
     public function show(Revisao $revisao)
     {
-        //
+        try {
+            $revisao = Revisao::find($revisao);
+
+            return $revisao;
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Revisao $revisao)
     {
-        //
+        try {
+            $revisao = Revisao::find($revisao->id);
+            if ($revisao) {
+                $revisao->update($request->all());
+
+                return $revisao;
+            } else {
+                return response()->json(['error' => 'Revisão não encontrada'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Revisao $revisao)
     {
-        //
+        try {
+            $revisao = Revisao::find($revisao->id);
+            if ($revisao) {
+                $revisao->delete();
+
+                return response()->json(['success' => 'Revisão deletada com sucesso'], 200);
+            } else {
+                return response()->json(['error' => 'Revisão não encontrada'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 }
