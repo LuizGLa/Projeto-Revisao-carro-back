@@ -76,6 +76,17 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        try {
+            $cliente = Cliente::find($cliente->id);
+            if ($cliente) {
+                $cliente->delete();
+
+                return $cliente;
+            } else {
+                return response()->json(['error' => 'Cliente não encontrado'], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 400);
+        }
     }
 }
