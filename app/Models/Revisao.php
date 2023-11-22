@@ -9,6 +9,17 @@ class Revisao extends Model
 {
     use HasFactory;
 
+    public function cliente()
+    {
+        return $this->belongsTo('App\Models\Cliente');
+    }
+
+    public function carro()
+    {
+        return $this->belongsTo('App\Models\Carro');
+    }
+
     protected $table = 'revisoes';
-    protected $fillable = ['data', 'descricao', 'carro_id'];
+
+    protected $fillable = ['data', 'descricao', 'carro_id', 'valor', 'cliente_id'];
 }

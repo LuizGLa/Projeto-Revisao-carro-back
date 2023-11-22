@@ -20,8 +20,8 @@ class ClienteController extends Controller
         try {
             $request->validate([
                 'nome' => 'required',
-                'cpf' => 'required',
                 'sexo' => 'required',
+                'idade' => 'required',
             ]);
             $cliente = Cliente::create($request->all());
 

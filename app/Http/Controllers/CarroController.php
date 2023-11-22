@@ -40,7 +40,7 @@ class CarroController extends Controller
     public function show(Carro $carro)
     {
         try {
-            $carro = Carro::find($carro);
+            $carro = Carro::with('cliente')->find($carro->id);
 
             return $carro;
         } catch (\Throwable $th) {

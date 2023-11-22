@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('revisoes', function (Blueprint $table) {
             $table->id();
-            $table->string('data');
+            $table->date('data');
             $table->string('descricao');
             $table->decimal('valor', 8, 2);
             $table->unsignedBigInteger('carro_id');

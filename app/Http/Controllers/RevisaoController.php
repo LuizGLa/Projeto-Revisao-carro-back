@@ -10,9 +10,9 @@ class RevisaoController extends Controller
     public function index()
     {
         try {
-            $revisao = Revisao::all();
+            $revisoes = Revisao::with('cliente', 'carro')->get();
 
-            return $revisao;
+            return $revisoes;
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
         }
@@ -39,10 +39,10 @@ class RevisaoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Revisao $revisao)
+    public function show($id)
     {
         try {
-            $revisao = Revisao::find($revisao);
+            $revisao = Revisao::with('cliente', 'carro')->findOrFail($id);
 
             return $revisao;
         } catch (\Throwable $th) {
