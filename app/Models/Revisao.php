@@ -10,4 +10,5 @@ class Revisao extends Model
     use HasFactory;
 
     protected $table = 'revisoes';
+    protected $fillable = ['data', 'descricao', 'carro_id'];
 }
